@@ -96,7 +96,7 @@ public class Main {
                 String first_name = resultSet.getString("first_name");
                 String second_name = resultSet.getString("second_name");
                 String group = resultSet.getString("group");
-                System.out.println("Прочитана строка: " + String.format("%s, %s, %s", id, first_name, second_name, group));
+                System.out.println("Прочитана строка: " + String.format("%s, %s, %s, %s", id, first_name, second_name, group));
             }
 
         }
@@ -105,15 +105,16 @@ public class Main {
     static void searchStudentsByGroup(Connection connection, String groupName) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("""
-                    select id, first_name, second_name, `group`
-                    from GB_students.students WHERE `group` = '""" + groupName + "';");
+                    
+                    SELECT `id`,`first_name`, `second_name`,`group`
+                    FROM `GB_students`.`students` WHERE `group` ='"""+ groupName + "';");
             System.out.println("Студенты группы: " + groupName);
             while (resultSet.next()) {
                 UUID id =  UUID.fromString(resultSet.getString("id"));
                 String first_name = resultSet.getString("first_name");
                 String second_name = resultSet.getString("second_name");
                 UUID group = UUID.fromString(resultSet.getString("group"));
-                System.out.println("Прочитана строка: " + String.format("%s, %s, %s", id, first_name, second_name, group));
+                System.out.println("Прочитана строка: " + String.format("%s, %s, %s  %s", id, first_name, second_name, group));
             }
 
         }
