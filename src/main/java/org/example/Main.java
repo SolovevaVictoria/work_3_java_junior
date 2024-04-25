@@ -77,9 +77,9 @@ public class Main {
             // .executeUpdate() количество строк, на которые повлиял запрос
             statement.execute("INSERT INTO `GB_students`.`students`(`id`,`first_name`, `second_name`,`group`) VALUES" +
                 "(UUID(), 'Victoria', 'Soloveva','" + getIdGroup(connection,"group1")+ "')," +
-                "(UUID(), 'Vladimir', 'Solovev','" + getIdGroup(connection,"group1")+ "')," +
+                "(UUID(), 'Vladimir', 'Solovev','" + getIdGroup(connection,"group2")+ "')," +
                 "(UUID(), 'David', 'Solovev','" + getIdGroup(connection,"group1")+ "')," +
-                "(UUID(), 'Mia', 'Boyka','" + getIdGroup(connection,"group1")+ "');");
+                "(UUID(), 'Mia', 'Boyka','" + getIdGroup(connection,"group2")+ "');");
 
     }
     }
@@ -105,9 +105,8 @@ public class Main {
     static void searchStudentsByGroup(Connection connection, String groupName) throws SQLException {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("""
-                    
                     SELECT `id`,`first_name`, `second_name`,`group`
-                    FROM `GB_students`.`students` WHERE `group` ='"""+ groupName + "';");
+                    FROM `GB_students`.`students` WHERE `group` ='"""+ getIdGroup(connection, groupName) + "';");
             System.out.println("Студенты группы: " + groupName);
             while (resultSet.next()) {
                 UUID id =  UUID.fromString(resultSet.getString("id"));
