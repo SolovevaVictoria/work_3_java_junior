@@ -112,7 +112,7 @@ public class Main {
                 UUID id =  UUID.fromString(resultSet.getString("id"));
                 String first_name = resultSet.getString("first_name");
                 String second_name = resultSet.getString("second_name");
-                String group = resultSet.getString("group");
+                UUID group = UUID.fromString(resultSet.getString("group"));
                 System.out.println("Прочитана строка: " + String.format("%s, %s, %s", id, first_name, second_name, group));
             }
 
