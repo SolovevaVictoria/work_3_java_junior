@@ -17,7 +17,7 @@ public class Main {
             addTable(connection);
             addStudents(connection);
             searchStudents(connection);
-            searchStudentsByGroup(connection, "1");
+            searchStudentsByGroup(connection, "group1");
         } catch (SQLException e) {
             System.err.println("Соединение не удалось " + e.getMessage());
         }
@@ -58,7 +58,7 @@ public class Main {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("""
                     select id from `GB_students`.`groups`
-                    WHERE `group_name` = '""" + group_n + "';");
+                    WHERE `group_name` ='"""+ group_n + "';");
 
             if (resultSet.next()){
                 id =  resultSet.getString("id");
@@ -106,7 +106,7 @@ public class Main {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("""
                     select id, first_name, second_name, `group`
-                    from GB_students.students WHERE `group` = """ + groupName + ";");
+                    from GB_students.students WHERE `group` = '""" + groupName + "';");
             System.out.println("Студенты группы: " + groupName);
             while (resultSet.next()) {
                 UUID id =  UUID.fromString(resultSet.getString("id"));
